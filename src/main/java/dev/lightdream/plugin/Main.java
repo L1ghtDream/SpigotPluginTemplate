@@ -21,12 +21,10 @@ public final class Main extends LightDreamPlugin {
 
     @Override
     public void loadConfigs() {
-
     }
 
     @Override
     public void loadBaseCommands() {
-
     }
 
 
