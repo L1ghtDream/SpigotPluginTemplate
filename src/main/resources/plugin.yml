@@ -1,0 +1,10 @@
+name: SpigotPlugin
+version: ${project.version}
+main: dev.lightdream.plugin.Main
+authors: [ L1ghtDream ]
+website: https://lightdream.dev
+depend:
+  - LightDreamAPI
+commands:
+  st:
+    description: NA
