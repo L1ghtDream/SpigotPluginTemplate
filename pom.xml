@@ -52,7 +52,7 @@
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
         <repository>
-            <id>sonatype</id>
+            <id>lightdream</id>
             <url>https://repo.lightdream.dev/artifactory/lightdream-api-libs-release-local/</url>
         </repository>
     </repositories>
@@ -67,7 +67,7 @@
         <dependency>
             <groupId>dev.lightdream</groupId>
             <artifactId>LightDreamAPI</artifactId>
-            <version>1.30</version>
+            <version>1.94</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

@@ -1,6 +1,10 @@
 package dev.lightdream.plugin;
 
 import dev.lightdream.api.LightDreamPlugin;
+import dev.lightdream.api.files.config.Config;
+import dev.lightdream.api.files.config.Lang;
+import dev.lightdream.api.files.config.SQLConfig;
+import dev.lightdream.api.utils.LangUtils;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,6 +25,9 @@ public final class Main extends LightDreamPlugin {
 
     @Override
     public void loadConfigs() {
+        sqlConfig = fileManager.load(SQLConfig.class);
+        baseConfig = fileManager.load(Config.class);
+        baseLang = (Lang) fileManager.load(LangUtils.getLang(Main.class, baseConfig.lang));
     }
 
     @Override
