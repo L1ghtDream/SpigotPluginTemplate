@@ -2,13 +2,14 @@ package dev.lightdream.plugin;
 
 import dev.lightdream.api.API;
 import dev.lightdream.api.LightDreamPlugin;
-import dev.lightdream.api.files.config.JdaConfig;
 import dev.lightdream.api.files.config.SQLConfig;
 import dev.lightdream.api.managers.MessageManager;
-import dev.lightdream.plugin.conifg.Config;
-import dev.lightdream.plugin.conifg.Lang;
+import dev.lightdream.plugin.config.Config;
+import dev.lightdream.plugin.config.Lang;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
 
 public final class Main extends LightDreamPlugin {
 
@@ -17,6 +18,9 @@ public final class Main extends LightDreamPlugin {
     //Settings
     public Config config;
     public Lang lang;
+
+    //Langs
+    public HashMap<String, Lang> langs = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -34,11 +38,8 @@ public final class Main extends LightDreamPlugin {
         sqlConfig = fileManager.load(SQLConfig.class);
         config = fileManager.load(Config.class);
         baseConfig = config;
-        baseConfig.langs.forEach(lang -> {
-            Lang l = fileManager.load(Lang.class, fileManager.getFile(lang));
-            langs.put(lang, l);
-        });
-        baseLang = langs.get(baseConfig.baseLang);
+        lang = langs.get(baseConfig.baseLang);
+        baseLang = lang;
     }
 
     @Override
@@ -55,5 +56,15 @@ public final class Main extends LightDreamPlugin {
         API.instance.langManager.register(this, langs);
     }
 
+    @Override
+    public HashMap<String, Object> getLangs() {
+        HashMap<String, Object> langs = new HashMap<>();
 
+        baseConfig.langs.forEach(lang -> {
+            Lang l = fileManager.load(Lang.class, fileManager.getFile(lang));
+            langs.put(lang, l);
+        });
+
+        return langs;
+    }
 }
