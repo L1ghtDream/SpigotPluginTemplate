@@ -2,11 +2,14 @@ package dev.lightdream.plugin;
 
 import dev.lightdream.api.API;
 import dev.lightdream.api.LightDreamPlugin;
+import dev.lightdream.api.databases.User;
 import dev.lightdream.api.files.config.SQLConfig;
+import dev.lightdream.api.managers.DatabaseManager;
 import dev.lightdream.api.managers.MessageManager;
 import dev.lightdream.plugin.config.Config;
 import dev.lightdream.plugin.config.Lang;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -19,14 +22,12 @@ public final class Main extends LightDreamPlugin {
     public Config config;
     public Lang lang;
 
-    //Langs
-    public HashMap<String, Lang> langs = new HashMap<>();
-
     @Override
     public void onEnable() {
         init("SpigotTemplate", "st", "1.0");
         instance = this;
     }
+
 
     @Override
     public @NotNull String parsePapi(OfflinePlayer offlinePlayer, String s) {
@@ -38,8 +39,13 @@ public final class Main extends LightDreamPlugin {
         sqlConfig = fileManager.load(SQLConfig.class);
         config = fileManager.load(Config.class);
         baseConfig = config;
-        lang = langs.get(baseConfig.baseLang);
+        lang = fileManager.load(Lang.class, fileManager.getFile(baseConfig.baseLang));
         baseLang = lang;
+    }
+
+    @Override
+    public void disable() {
+
     }
 
     @Override
@@ -48,12 +54,12 @@ public final class Main extends LightDreamPlugin {
 
     @Override
     public MessageManager instantiateMessageManager() {
-        return new MessageManager(this);
+        return new MessageManager(this, Main.class);
     }
 
     @Override
     public void registerLangManager() {
-        API.instance.langManager.register(this, langs);
+        API.instance.langManager.register(Main.class, getLangs());
     }
 
     @Override
@@ -67,4 +73,18 @@ public final class Main extends LightDreamPlugin {
 
         return langs;
     }
+
+    @Override
+    public DatabaseManager getDatabaseManager() {
+        return databaseManager;
+    }
+
+    @Override
+    public void setLang(Player player, String s) {
+        User user = databaseManager.getUser(player);
+        user.setLang(s);
+        databaseManager.save(user);
+    }
+
+
 }
