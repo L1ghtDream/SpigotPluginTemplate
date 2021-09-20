@@ -49,6 +49,11 @@ public final class Main extends LightDreamPlugin {
     }
 
     @Override
+    public void registerFileManagerModules() {
+
+    }
+
+    @Override
     public void loadBaseCommands() {
     }
 
