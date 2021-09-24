@@ -1,6 +1,6 @@
 name: SpigotPlugin
 version: ${project.version}
-main: dev.lightdream.plugin.Main
+main: dev.lightdream.template.Main
 authors: [ L1ghtDream ]
 website: https://lightdream.dev
 softdepend:

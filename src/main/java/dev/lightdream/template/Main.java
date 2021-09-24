@@ -1,4 +1,4 @@
-package dev.lightdream.plugin;
+package dev.lightdream.template;
 
 import dev.lightdream.api.API;
 import dev.lightdream.api.LightDreamPlugin;
@@ -6,8 +6,8 @@ import dev.lightdream.api.databases.User;
 import dev.lightdream.api.files.config.SQLConfig;
 import dev.lightdream.api.managers.DatabaseManager;
 import dev.lightdream.api.managers.MessageManager;
-import dev.lightdream.plugin.config.Config;
-import dev.lightdream.plugin.config.Lang;
+import dev.lightdream.template.configs.Config;
+import dev.lightdream.template.configs.Lang;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
