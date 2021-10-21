@@ -22,10 +22,16 @@ public final class Main extends LightDreamPlugin {
     public Config config;
     public Lang lang;
 
+    //Managers
+    public DatabaseManager databaseManager;
+
     @Override
     public void onEnable() {
-        init("SpigotTemplate", "st", "1.0");
         instance = this;
+
+        init("SpigotTemplate", "st", "1.0");
+
+        databaseManager = new DatabaseManager(this);
     }
 
 
