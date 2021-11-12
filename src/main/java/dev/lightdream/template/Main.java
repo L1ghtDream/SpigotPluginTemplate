@@ -4,10 +4,11 @@ import dev.lightdream.api.API;
 import dev.lightdream.api.LightDreamPlugin;
 import dev.lightdream.api.configs.SQLConfig;
 import dev.lightdream.api.databases.User;
-import dev.lightdream.api.managers.DatabaseManager;
 import dev.lightdream.api.managers.MessageManager;
+import dev.lightdream.api.managers.database.IDatabaseManagerImpl;
 import dev.lightdream.template.configs.Config;
 import dev.lightdream.template.configs.Lang;
+import dev.lightdream.template.managers.DatabaseManager;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -23,7 +24,7 @@ public final class Main extends LightDreamPlugin {
     public Lang lang;
 
     //Managers
-    public DatabaseManager databaseManager;
+    public IDatabaseManagerImpl databaseManager;
 
     @Override
     public void onEnable() {
@@ -60,6 +61,11 @@ public final class Main extends LightDreamPlugin {
     }
 
     @Override
+    public void registerUser(Player player) {
+
+    }
+
+    @Override
     public void loadBaseCommands() {
     }
 
@@ -86,7 +92,7 @@ public final class Main extends LightDreamPlugin {
     }
 
     @Override
-    public DatabaseManager getDatabaseManager() {
+    public IDatabaseManagerImpl getDatabaseManager() {
         return databaseManager;
     }
 
@@ -94,7 +100,7 @@ public final class Main extends LightDreamPlugin {
     public void setLang(Player player, String s) {
         User user = databaseManager.getUser(player);
         user.setLang(s);
-        databaseManager.save(user);
+        user.save();
     }
 
 
